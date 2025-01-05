@@ -1,4 +1,4 @@
-# Imposter Mock Engine [![CI](https://github.com/gatehill/imposter-js/actions/workflows/ci.yaml/badge.svg)](https://github.com/gatehill/imposter-js/actions/workflows/ci.yaml)
+# Imposter Mock Engine [![CI](https://github.com/imposter-project/imposter-js/actions/workflows/ci.yaml/badge.svg)](https://github.com/imposter-project/imposter-js/actions/workflows/ci.yaml)
 
 Bindings for using the [Imposter mock engine](https://www.imposter.sh) in JavaScript/Node.js.
 
@@ -24,7 +24,7 @@ console.log(response.data);
 
 This is just a simple example. Your mocks can have dynamic responses, request validation against an OpenAPI schema, data capture, performance delays etc...
 
-> See the [sample](https://github.com/gatehill/imposter-js/tree/main/sample) directory for a Node.js project with many examples.
+> See the [sample](https://github.com/imposter-project/imposter-js/tree/main/sample) directory for a Node.js project with many examples.
 
 ## Quickstart
 
@@ -51,7 +51,7 @@ Or add to your `package.json` as a dev dependency:
 
 ## Examples
 
-> See the [sample](https://github.com/gatehill/imposter-js/tree/main/sample) directory for a Node.js project with many examples.
+> See the [sample](https://github.com/imposter-project/imposter-js/tree/main/sample) directory for a Node.js project with many examples.
 
 ### Example with Jest
 
@@ -141,7 +141,7 @@ console.log(response.data);
 ## Documentation
 
 - [Imposter user documentation](https://docs.imposter.sh) - this is the main documentation
-- [Mock engine configuration](https://github.com/gatehill/imposter-js/blob/main/docs/config.md) - configuration for different engine types
+- [Mock engine configuration](https://github.com/imposter-project/imposter-js/blob/main/docs/config.md) - configuration for different engine types
 
 ## Features
 
