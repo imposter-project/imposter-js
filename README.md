@@ -46,6 +46,7 @@ Or add to your `package.json` as a dev dependency:
 
 ## Prerequisites
 
+- Node.js 20+
 - Install **[Imposter CLI](https://github.com/gatehill/imposter-cli/blob/main/docs/install.md)**. Supports macOS, Linux, Windows.
 - Ensure you satisfy the CLI requirements (either [Docker installed](https://docs.docker.com/get-docker/) and running, or a [JVM installed](https://github.com/gatehill/imposter-cli/blob/main/docs/jvm_engine.md)).
 
