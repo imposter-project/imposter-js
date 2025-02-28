@@ -13,15 +13,15 @@ jobs:
           node-version: '18.x'
           registry-url: 'https://registry.npmjs.org'
 
-      - name: Install Imposter CLI
-        run: curl -L https://raw.githubusercontent.com/gatehill/imposter-cli/main/install/install_imposter.sh | bash -
-
-      - name: Install core module dependencies
-        run: npm install
-      - name: Pull test dependencies
+      - name: Install Imposter
+        uses: imposter-project/imposter-github-action/setup@v0.6.1
+      - name: Pull engine
         run: |
           imposter engine pull --version 4.5.8
           imposter engine pull --version latest
+
+      - name: Install core module dependencies
+        run: npm install
       - name: Test core module
         run: |
           export IMPOSTER_DOCKER_CONTAINERUSER="$(id -u)"
