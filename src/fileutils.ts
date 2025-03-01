@@ -4,23 +4,42 @@ import {versionReader} from "./version";
 
 class FileUtils {
     private _initialised: boolean = false;
-    private _pkgJsonDir?: string;
+    private _pkgJsonDir?: string | null;
 
     initIfRequired = async () => {
         await versionReader.initIfRequired();
 
         if (!this._initialised) {
-            for (let path of module.paths) {
-                try {
-                    let prospectivePkgJsonDir = dirname(path);
-                    await fs.promises.access(path, constants.F_OK);
-                    this._pkgJsonDir = prospectivePkgJsonDir;
-                    break
-                } catch (ignored) {
-                }
-            }
+            this._pkgJsonDir = await this.findRootProjectDir();
             this._initialised = true;
         }
+    }
+
+    /**
+     * Attempt to detect the project root directory by searching for a package.json file.
+     */
+    findRootProjectDir = async () => {
+        let paths: string[] = [];
+
+        if (typeof require !== 'undefined') {
+            // CommonJS: Use module.paths
+            paths = module.paths;
+        } else if (typeof import.meta !== 'undefined') {
+            // ESM: Dynamically import createRequire and use it
+            const moduleImport = await import('module') as unknown as typeof import('module');
+            const require = moduleImport.createRequire(import.meta.url);
+            paths = require.resolve.paths('package.json') || [];
+        }
+
+        for (const path of paths) {
+            try {
+                let prospectivePkgJsonDir = dirname(path);
+                await fs.promises.access(`${prospectivePkgJsonDir}/package.json`, constants.F_OK);
+                return prospectivePkgJsonDir;
+            } catch (ignored) {}
+        }
+
+        return null;
     }
 
     /**
