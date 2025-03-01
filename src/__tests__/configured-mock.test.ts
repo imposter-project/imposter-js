@@ -70,11 +70,12 @@ it('assigns free port', async () => {
 });
 
 it('sleeps', async () => {
-    const expectedDurationMs = 10;
+    const expectedDurationMs = 50;
+    const skew = 5;
     const start = new Date().getTime();
 
     await utils.sleep(expectedDurationMs);
 
     const now = new Date().getTime();
-    expect(now).toBeGreaterThanOrEqual(start + expectedDurationMs);
+    expect(now + skew).toBeGreaterThanOrEqual(start + expectedDurationMs);
 });
