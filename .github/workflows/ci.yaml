@@ -5,15 +5,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '20.x'
-          registry-url: 'https://registry.npmjs.org'
 
       - name: Install Imposter
         uses: imposter-project/imposter-github-action/setup@v0.6.1
@@ -46,10 +42,18 @@ jobs:
     needs: build
     if: startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      # This is required for the `npm publish` command to generate provenance
+      id-token: write
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Get Changelog Entries
         uses: release-tools/since@707ab359a9d7f14e5d19126ec19e3fe218b8cbcc
@@ -57,7 +61,7 @@ jobs:
           output-file: version_changelog.txt
 
       - name: Publish to NPM
-        run: npm publish --access public
+        run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPMJS_TOKEN }}
 
