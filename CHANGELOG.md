@@ -1,0 +1,179 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+
+## [1.0.3] - 2025-01-05
+### Changed
+- build: moves typescript to devDependencies.
+- build: simplifies release script.
+
+## [1.0.2] - 2025-01-05
+### Changed
+- docs: describes release process.
+- docs: updates links to JavaScript bindings to https://github.com/imposter-project.
+
+## [1.0.1] - 2024-01-26
+### Changed
+- build: adds release script.
+
+### Fixed
+- fix: don't attempt to write to a closed log stream.
+- fix: improved log stream error handling.
+
+## [1.0.0] - 2024-01-26
+### Changed
+- build: regenerates lockfile for node 18 npm.
+- chore: bumps imposter to 3.33.4.
+- ci: bumps node to 18.
+- docs: updates sample project to expect node 18+.
+- refactor: improves type annotation usage.
+- refactor: migrates to typescript.
+- refactor: simplify healthcheck.
+- test: bumps jest version.
+
+## [0.6.2] - 2022-01-05
+### Added
+- feat: adds logging of arguments and environment before engine spawn.
+- feat: allows builder to log generated config.
+
+### Changed
+- chore: pins engine version to 2.4.13.
+- ci: pulls docker images before test execution.
+- docs: adds selinux user permissions instructions.
+- test: bumps engine version.
+
+### Fixed
+- fix: aligns container uid to runner.
+- fix: environment variable name validation.
+
+## [0.6.1] - 2021-12-21
+### Changed
+- docs: improves README.
+- refactor: supports JAVA_TOOL_OPTIONS over JAVA_OPTS environment variable.
+
+## [0.6.0] - 2021-12-21
+### Added
+- feat: allows environment variables to be passed to the mock engine.
+
+### Changed
+- build: updates sample prep script.
+
+## [0.5.5] - 2021-11-09
+### Changed
+- build: fixes entrypoint path.
+- test: improves coverage of configured mock.
+
+### Fixed
+- fix: corrects SemVer comparison.
+
+## [0.5.4] - 2021-09-29
+### Other
+- Improves sample build instructions.
+
+## [0.5.3] - 2021-09-29
+### Other
+- Adds status badge.
+- Switches sample relative dependency to use 'dist'.
+
+## [0.5.2] - 2021-09-26
+### Other
+- Renames sample APIs.
+
+## [0.5.1] - 2021-09-26
+### Other
+- Simplifies sample bootstrap.
+
+## [0.5.0] - 2021-09-25
+### Other
+- Adds convenience start function on builder.
+- Automatically selects a free port if none set.
+
+## [0.4.1] - 2021-09-25
+### Other
+- Adds convenience functions for templated responses.
+
+## [0.4.0] - 2021-09-25
+### Other
+- Adds resource builder.
+- Improves documentation.
+- Improves sample documentation.
+
+## [0.3.3] - 2021-09-25
+### Other
+- Consider process ended on close event, not exit.
+- Explicitly checks initialisation state.
+- Improves sample code comments and reorganises test data.
+- Rolls back lockfiles to NPM 6.
+- Switches to manual Jest mock for manager.
+
+## [0.3.2] - 2021-09-24
+### Other
+- Improves configured mock coverage.
+
+## [0.3.1] - 2021-09-24
+### Other
+- Improves error trapping on launch.
+- Improves mock builder coverage.
+
+## [0.3.0] - 2021-09-23
+### Other
+- Removes dependency on axios.
+
+## [0.2.7] - 2021-09-23
+### Other
+- Factors out utility functions into separate files.
+
+## [0.2.6] - 2021-09-22
+### Other
+- Flattens sample project structure and improves documentation.
+- Improves CI step naming.
+- Runs build before release.
+
+## [0.2.5] - 2021-09-22
+### Other
+- Adds Publishing configuration.
+
+## [0.2.4] - 2021-09-22
+### Other
+- Improves engine type documentation.
+
+## [0.2.3] - 2021-09-22
+### Other
+- Allows project specific engine configuration.
+
+## [0.2.2] - 2021-09-20
+### Other
+- Adds support for building from raw configuration.
+- Fixes sample test.
+- Logs engine output to file.
+- Removes automatic publish workflow.
+- Sets Babel target to Node 12.
+
+## [0.2.1] - 2021-09-19
+### Other
+- Improves documentation.
+
+## [0.2.0] - 2021-09-19
+### Other
+- Adds release script.
+- Adds support for mocking bare OpenAPI spec files.
+
+## [0.1.7] - 2021-09-17
+### Other
+- Adds package publish trigger.
+
+## [0.1.6] - 2021-09-16
+### Other
+- Adds npm installation instructions.
+
+## [0.1.5] - 2021-09-16
+### Other
+- Adds GitHub actions workflows.
+- Improves documentation.
+- Initial commit.
+- Moves sample to separate module.
+- Restricts published files.
