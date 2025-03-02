@@ -42,8 +42,28 @@ jobs:
           export IMPOSTER_DOCKER_CONTAINERUSER="$(id -u)"
           npm test
 
-      - name: Release
-        if: startsWith(github.ref, 'refs/tags/')
+  release:
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get Changelog Entries
+        uses: release-tools/since@707ab359a9d7f14e5d19126ec19e3fe218b8cbcc
+        with:
+          output-file: version_changelog.txt
+
+      - name: Publish to NPM
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPMJS_TOKEN }}
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          body_path: version_changelog.txt
+          draft: false
+          prerelease: false
