@@ -7,18 +7,24 @@
     "type": "git",
     "url": "git+https://github.com/imposter-project/imposter-js.git"
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/cjs/index.cjs",
+  "module": "dist/esm/index.js",
+  "exports": {
+    "import": "./dist/esm/index.js",
+    "require": "./dist/cjs/index.cjs"
+  },
+  "types": "dist/esm/index.d.ts",
   "scripts": {
-    "build": "npm run clean && mkdir -p ./dist && tsc",
+    "build": "npm run clean && rollup -c",
     "clean": "rimraf ./dist",
     "release": "npm test && npm run build && npm publish --access public",
     "test": "jest"
   },
   "files": [
-    "dist/*.js",
-    "dist/*.js.map",
-    "dist/*.d.ts"
+    "dist/**/*.js",
+    "dist/**/*.cjs",
+    "dist/**/*.js.map",
+    "dist/**/*.d.ts"
   ],
   "keywords": [
     "openapi",
@@ -34,11 +40,12 @@
     "axios": "^1.8.1",
     "jest": "^29.7.0",
     "rimraf": "^3.0.2",
+    "rollup": "^4.34.8",
+    "rollup-plugin-typescript2": "^0.36.0",
     "ts-jest": "^29.2.6",
     "typescript": "^5.8.2"
   },
   "engines": {
     "node": ">=20.0.0"
-  },
-  "dependencies": {}
+  }
 }
