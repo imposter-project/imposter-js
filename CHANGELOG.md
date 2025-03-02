@@ -6,6 +6,38 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [2.0.0] - 2025-03-02
+### Changed
+- build(deps-dev): bump braces from 3.0.2 to 3.0.3 in /sample
+- build: set Node.js 20 as minimum version.
+- build: upgrades lock file to npm v10 compatible.
+- build: upgrades sample lock file to npm v10 compatible.
+- build: use normalised form for repository URL.
+- build: use since for releases.
+- chore(deps): bump typescript to 5.8.2
+- chore(deps): bumps Imposter to 4.5.8.
+- chore(deps): bumps actions/checkout to v4.
+- chore(deps): bumps actions/setup-node to v4.
+- chore(deps-dev): bump ts-jest from 29.1.2 to 29.2.6
+- chore(deps-dev): bumps axios to 1.8.1.
+- ci: adds dependabot config.
+- ci: dependabot should target main.
+- ci: generates provenance statement on publish.
+- ci: moves release to separate job.
+- ci: specify package ecosystem.
+- ci: trigger CI on pull requests.
+- ci: use official Imposter action.
+- docs: adds changelog.
+- test: adds skew to sleep test.
+- test: expect CLI version 1.x.
+
+### Fixed
+- fix: sample/package.json & sample/package-lock.json to reduce vulnerabilities
+- fix: upgrade typescript 5.7.2.
+
+### Other
+- build!: BREAKING CHANGE drop support for Node versions before 20.
+
 ## [1.0.3] - 2025-01-05
 ### Changed
 - build: moves typescript to devDependencies.
