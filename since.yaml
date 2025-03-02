@@ -1,0 +1,9 @@
+requireBranch: main
+
+ignore:
+  - "build: release"
+
+before:
+  - script: |
+      npm version --no-git-tag-version "${SINCE_NEW_VERSION}"
+      git add package.json package-lock.json
