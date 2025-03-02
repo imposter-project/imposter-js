@@ -5,7 +5,7 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/imposter-project/imposter-js.git"
+    "url": "git+https://github.com/imposter-project/imposter-js.git"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
