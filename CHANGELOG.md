@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [2.1.0] - 2025-03-05
+### Added
+- feat: dual build cjs and esm
+
+### Changed
+- build: use relative paths for main/module/types package properties.
+- chore(deps): bump release-tools/since
+- refactor: allow ESM projects to specify project root.
+- refactor: moves project root detection to separate function.
+
 ## [2.0.0] - 2025-03-02
 ### Changed
 - build(deps-dev): bump braces from 3.0.2 to 3.0.3 in /sample
