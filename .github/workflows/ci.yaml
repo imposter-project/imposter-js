@@ -38,6 +38,13 @@ jobs:
           export IMPOSTER_DOCKER_CONTAINERUSER="$(id -u)"
           npm test
 
+      - name: Upload artifact
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
   release:
     needs: build
     if: startsWith(github.ref, 'refs/tags/')
@@ -59,6 +66,12 @@ jobs:
         uses: release-tools/since@daafb0e6603946fd4185212f0decaf03d8fe1bc4
         with:
           output-file: version_changelog.txt
+
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
 
       - name: Publish to NPM
         run: npm publish --provenance --access public
