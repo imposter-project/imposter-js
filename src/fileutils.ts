@@ -1,6 +1,7 @@
 import path, {dirname} from "path";
 import fs, {constants} from "fs";
 import {versionReader} from "./version";
+import {nodeConsole} from "./console";
 
 class FileUtils {
     private _initialised: boolean = false;
@@ -19,7 +20,17 @@ class FileUtils {
      * Attempt to detect the project root directory by searching for a package.json file.
      */
     private async detectPackageJsonDir(): Promise<string | null> {
-        for (let path of module.paths) {
+        let paths: string[];
+        if (typeof require !== 'undefined') {
+            // CommonJS: Use module.paths
+            paths = module.paths;
+            nodeConsole.debug("Searching module.paths for package.json, since using CommonJS");
+        } else {
+            // not supported in ESM
+            paths = [];
+            nodeConsole.debug("Skipping automatic package.json detection, since using ESM");
+        }
+        for (let path of paths) {
             try {
                 let prospectivePkgJsonDir = dirname(path);
                 await fs.promises.access(path, constants.F_OK);
@@ -31,15 +42,23 @@ class FileUtils {
     }
 
     /**
-     * Searches the current working directory and the module's project directory
-     * for a CLI configuration file.
+     * Searches the specified paths for a CLI configuration file.
+     * If not specified, and using CommonJS, the module's project directory
+     * and the working directory are searched.
      */
     discoverLocalConfig = (searchPaths: string[] | null = null): string | null => {
         return versionReader.runIfVersionAtLeast(0, 6, 0, () => {
-            const sp = searchPaths || [
-                this.getPkgJsonDir(),
-                process.cwd(),
-            ] as string[];
+            const sp: string[] = [];
+            if (searchPaths) {
+                sp.push(...searchPaths);
+            } else {
+                const jsonPkgDir = this.getPkgJsonDir();
+                if (jsonPkgDir) {
+                    sp.push(jsonPkgDir);
+                }
+                sp.push(process.cwd());
+            }
+
             const configs = sp
                 .map(searchPath => path.join(searchPath, 'imposter.config.json'))
                 .filter(fs.existsSync);
@@ -51,11 +70,11 @@ class FileUtils {
     /**
      * Determine the path to the module's project directory.
      */
-    getPkgJsonDir = (): string => {
+    getPkgJsonDir = (): string | null => {
         if (!this._initialised) {
             throw new Error('initIfRequired() not called');
         }
-        return this._pkgJsonDir as string;
+        return this._pkgJsonDir;
     }
 }
 

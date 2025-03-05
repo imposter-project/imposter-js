@@ -17,13 +17,15 @@ export class ConfiguredMock {
     logFileStream: fs.WriteStream | null = null;
     proc?: ChildProcess;
     logFilePath?: string;
+    projectRootDir: string | null;
 
     private utils: Utils;
 
-    constructor(configDir: string, port: number | null = null, env: Record<string, string> = {}) {
+    constructor(configDir: string, port: number | null, env: Record<string, string>, projectRootDir: string | null) {
         this.configDir = configDir;
         this.port = port;
         this.env = env;
+        this.projectRootDir = projectRootDir;
         this.utils = new Utils();
     }
 
@@ -43,7 +45,7 @@ export class ConfiguredMock {
             }
         }
 
-        const localConfigFile = fileUtils.discoverLocalConfig();
+        const localConfigFile = fileUtils.discoverLocalConfig(this.projectRootDir ? [this.projectRootDir] : null);
 
         this.proc = await new Promise(async (resolve, reject) => {
             try {

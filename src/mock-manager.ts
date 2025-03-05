@@ -5,8 +5,8 @@ export class MockManager {
     private _logVerbose: boolean = false;
     private _mocks: ConfiguredMock[] = [];
 
-    prepare = (configDir: string, port: number | null = null, env: Record<string, string> = {}): ConfiguredMock => {
-        const mock = new ConfiguredMock(configDir, port, env);
+    prepare = (configDir: string, port: number | null = null, env: Record<string, string> = {}, projectRootDir: string | null = null): ConfiguredMock => {
+        const mock = new ConfiguredMock(configDir, port, env, projectRootDir);
         if (this._logVerbose) {
             mock.verbose();
         }
