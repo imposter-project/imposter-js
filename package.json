@@ -15,16 +15,16 @@
   },
   "types": "esm/index.d.ts",
   "scripts": {
-    "build": "npm run clean && rollup -c",
+    "build": "npm run clean && rollup -c && cp package.json dist/package.json",
     "clean": "rimraf ./dist",
     "release": "npm test && npm run build && npm publish --access public",
     "test": "jest"
   },
   "files": [
-    "dist/**/*.js",
-    "dist/**/*.cjs",
-    "dist/**/*.js.map",
-    "dist/**/*.d.ts"
+    "**/*.js",
+    "**/*.cjs",
+    "**/*.js.map",
+    "**/*.d.ts"
   ],
   "keywords": [
     "openapi",

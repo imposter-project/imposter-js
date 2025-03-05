@@ -18,7 +18,6 @@ function package_dep() {
   popd || exit 1
 
   cp -r ../dist "${SAMPLE_DIR}"
-  cp ../package.json "${SAMPLE_DIR}"
 }
 
 function set_dep_version() {

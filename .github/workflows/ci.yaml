@@ -74,6 +74,7 @@ jobs:
           path: dist/
 
       - name: Publish to NPM
+        working-directory: dist
         run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPMJS_TOKEN }}
