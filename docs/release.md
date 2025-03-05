@@ -15,17 +15,17 @@ This document is for project maintainers and contributors. It describes the step
 
 ### Automated release
 
-Use the release script to publish a new version of the package to npm.
+Use [since](https://github.com/release-tools/since) to prepare a new version of the package to npm.
 
 ```bash
-cd scripts
-./prep-release.sh <release type>
+since project release
 ```
 
 This script will:
 
 1. Update the version number in `package.json` and `package-lock.json` using `npm version <version number>` in line with [Semantic Versioning](https://semver.org/).
-2. Create a new git tag.
+2. Update the `CHANGELOG.md` with the new version number and changes since the last release.
+3. Create a new git tag.
 
 You must then push the changes to the repository with `git push origin main --tags`. The GitHub Actions workflow will automatically publish the package to npm if the tests pass.
 
@@ -33,6 +33,8 @@ You must then push the changes to the repository with `git push origin main --ta
 
 If you need to release manually, follow these steps:
 
-1. Update the version number in `package.json` and `package-lock.json` using `npm version <version number>` in line with [Semantic Versioning](https://semver.org/). This will also create a new git tag.
-2. Push the changes to the repository with `git push origin main --tags`. 
-3. The GitHub Actions workflow will automatically publish the package to npm if the tests pass.
+1. Update the version number in `package.json` and `package-lock.json` using `npm version --no-git-tag-version <version number>` in line with [Semantic Versioning](https://semver.org/).
+2. Update the `CHANGELOG.md` with the new version number and changes since the last release.
+3. Create a new git tag in the format `v<version number>`. Note the prefix `v`.
+4. Push the changes to the repository with `git push origin main --tags`. 
+5. The GitHub Actions workflow will automatically publish the package to npm if the tests pass.
