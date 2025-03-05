@@ -4,23 +4,30 @@ import {versionReader} from "./version";
 
 class FileUtils {
     private _initialised: boolean = false;
-    private _pkgJsonDir?: string;
+    private _pkgJsonDir: string | null = null;
 
     initIfRequired = async () => {
         await versionReader.initIfRequired();
 
         if (!this._initialised) {
-            for (let path of module.paths) {
-                try {
-                    let prospectivePkgJsonDir = dirname(path);
-                    await fs.promises.access(path, constants.F_OK);
-                    this._pkgJsonDir = prospectivePkgJsonDir;
-                    break
-                } catch (ignored) {
-                }
-            }
+            this._pkgJsonDir = await this.detectPackageJsonDir();
             this._initialised = true;
         }
+    }
+
+    /**
+     * Attempt to detect the project root directory by searching for a package.json file.
+     */
+    private async detectPackageJsonDir(): Promise<string | null> {
+        for (let path of module.paths) {
+            try {
+                let prospectivePkgJsonDir = dirname(path);
+                await fs.promises.access(path, constants.F_OK);
+                return prospectivePkgJsonDir;
+            } catch (ignored) {
+            }
+        }
+        return null;
     }
 
     /**
