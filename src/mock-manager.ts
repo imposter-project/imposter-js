@@ -1,15 +1,12 @@
 import {MockBuilder} from "./mock-builder";
 import {ConfiguredMock} from "./configured-mock";
+import {setLogVerbose} from "./console";
 
 export class MockManager {
-    private _logVerbose: boolean = false;
     private _mocks: ConfiguredMock[] = [];
 
     prepare = (configDir: string, port: number | null = null, env: Record<string, string> = {}, projectRootDir: string | null = null): ConfiguredMock => {
         const mock = new ConfiguredMock(configDir, port, env, projectRootDir);
-        if (this._logVerbose) {
-            mock.verbose();
-        }
         this._mocks.push(mock);
         return mock;
     }
@@ -37,7 +34,7 @@ export class MockManager {
     }
 
     verbose = (): MockManager => {
-        this._logVerbose = true;
+        setLogVerbose(true);
         return this;
     }
 }

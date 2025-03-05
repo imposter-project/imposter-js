@@ -1,6 +1,6 @@
 import {versionReader} from "./version";
 import {fileUtils} from "./fileutils";
-import {nodeConsole} from "./console";
+import {isLogVerbose, nodeConsole, setLogVerbose} from "./console";
 import {ChildProcess, ChildProcessWithoutNullStreams, spawn} from "child_process";
 import path from "path";
 import fs from "fs";
@@ -12,7 +12,6 @@ export class ConfiguredMock {
     configDir: string;
     port: number | null;
     env: Record<string, string>;
-    logVerbose = false;
     logToFile = true;
     logFileStream: fs.WriteStream | null = null;
     proc?: ChildProcess;
@@ -40,7 +39,7 @@ export class ConfiguredMock {
         }
         if (!this.port) {
             this.port = await this.utils.assignFreePort();
-            if (this.logVerbose) {
+            if (isLogVerbose()) {
                 nodeConsole.debug(`Assigned free port ${this.port}`);
             }
         }
@@ -55,7 +54,7 @@ export class ConfiguredMock {
                     '--auto-restart=false',
                 ];
                 if (localConfigFile) {
-                    if (this.logVerbose) {
+                    if (isLogVerbose()) {
                         nodeConsole.debug(`Using project configuration: ${localConfigFile}`);
                     }
                     args.push(`--config=${localConfigFile}`);
@@ -67,7 +66,7 @@ export class ConfiguredMock {
                         ...this.env,
                     },
                 }
-                if (this.logVerbose) {
+                if (isLogVerbose()) {
                     nodeConsole.debug(`Arguments: ${JSON.stringify(args)}`);
                     nodeConsole.debug(`Environment: ${JSON.stringify(options.env)}`);
                 }
@@ -99,10 +98,10 @@ export class ConfiguredMock {
 
         }).on('close', (code) => {
             if (code !== 0) {
-                const advice = this.utils.buildDebugAdvice(this.logToFile, this.logVerbose, this.logFilePath);
+                const advice = this.utils.buildDebugAdvice(this.logToFile, isLogVerbose(), this.logFilePath);
                 reject(new Error(`Imposter process terminated with code: ${code}.${advice}`));
             } else {
-                if (this.logVerbose) {
+                if (isLogVerbose()) {
                     nodeConsole.debug('Imposter process terminated');
                 }
             }
@@ -113,10 +112,10 @@ export class ConfiguredMock {
             nodeConsole.debug(`Logging to ${this.logFilePath}`);
         }
         proc.stdout.on('data', chunk => {
-            this.utils.writeChunk(chunk, this.logVerbose, this.logToFile, nodeConsole.debug, this.logFileStream);
+            this.utils.writeChunk(chunk, isLogVerbose(), this.logToFile, nodeConsole.debug, this.logFileStream);
         });
         proc.stderr.on('data', chunk => {
-            this.utils.writeChunk(chunk, this.logVerbose, this.logToFile, nodeConsole.warn, this.logFileStream);
+            this.utils.writeChunk(chunk, isLogVerbose(), this.logToFile, nodeConsole.warn, this.logFileStream);
         });
     }
 
@@ -124,7 +123,7 @@ export class ConfiguredMock {
         nodeConsole.debug(`Waiting for mock server to come up on port ${this.port}`);
         while (true) {
             if (proc.exitCode) {
-                const advice = this.utils.buildDebugAdvice(this.logToFile, this.logVerbose, this.logFilePath);
+                const advice = this.utils.buildDebugAdvice(this.logToFile, isLogVerbose(), this.logFilePath);
                 throw new Error(`Failed to start mock engine on port ${this.port}. Exit code: ${proc.exitCode}${advice}`);
             }
             try {
@@ -159,8 +158,12 @@ export class ConfiguredMock {
         }
     }
 
+    /**
+     * @deprecated call on `MockManager` instead
+     */
     verbose = (): ConfiguredMock => {
-        this.logVerbose = true;
+        // backwards compatibility
+        setLogVerbose(true);
         return this;
     }
 

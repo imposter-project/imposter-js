@@ -24,11 +24,11 @@ class FileUtils {
         if (typeof require !== 'undefined') {
             // CommonJS: Use module.paths
             paths = module.paths;
-            nodeConsole.debug("Searching module.paths for package.json, since using CommonJS");
+            nodeConsole.trace("Searching module.paths for package.json, since using CommonJS");
         } else {
             // not supported in ESM
             paths = [];
-            nodeConsole.debug("Skipping automatic package.json detection, since using ESM");
+            nodeConsole.trace("Skipping automatic package.json detection, since using ESM");
         }
         for (let path of paths) {
             try {

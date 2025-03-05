@@ -111,6 +111,7 @@
     "bower_components",
     "jspm_packages",
     "dist",
+    "sample",
     "src/__tests__",
     "src/**/*.test.ts"
   ]
