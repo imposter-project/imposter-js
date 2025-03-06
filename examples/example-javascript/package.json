@@ -9,7 +9,7 @@
   },
   "main": "src/index.js",
   "scripts": {
-    "prep-sample": "bash ./prep-sample.sh",
+    "prep-example": "bash prep-example.sh",
     "test": "jest"
   },
   "keywords": [

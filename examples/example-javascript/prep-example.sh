@@ -17,7 +17,7 @@ function package_dep() {
   npm run build
   popd || exit 1
 
-  cp -r ../dist "${SAMPLE_DIR}"
+  cp -r ../../dist "${SAMPLE_DIR}"
 }
 
 function set_dep_version() {

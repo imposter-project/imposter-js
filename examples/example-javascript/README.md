@@ -3,12 +3,12 @@ Sample project for Imposter with Jest
 
 ## Prerequisites
 
-- Node.js 12+
+- Node.js 20+
 - [Imposter CLI](https://github.com/gatehill/imposter-cli)
 
 **Important:** Ensure you have built the parent module, on which this sample depends:
 
-    npm run prep-sample
+    npm run prep-example
 
 This creates a `tmp` directory containing the `@imposter-js/imposter` module.
 

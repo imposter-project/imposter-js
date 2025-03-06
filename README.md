@@ -24,7 +24,7 @@ console.log(response.data);
 
 This is just a simple example. Your mocks can have dynamic responses, request validation against an OpenAPI schema, data capture, performance delays etc...
 
-> See the [sample](https://github.com/imposter-project/imposter-js/tree/main/sample) directory for a Node.js project with many examples.
+> See the [examples](https://github.com/imposter-project/imposter-js/tree/main/examples) directory for a Node.js project with many examples.
 
 ## Quickstart
 
@@ -52,7 +52,7 @@ Or add to your `package.json` as a dev dependency:
 
 ## Examples
 
-> See the [sample](https://github.com/imposter-project/imposter-js/tree/main/sample) directory for a Node.js project with many examples.
+> See the [examples](https://github.com/imposter-project/imposter-js/tree/main/examples) directory for a Node.js project with many examples.
 
 ### Example with Jest
 

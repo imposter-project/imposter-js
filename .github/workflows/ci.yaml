@@ -27,13 +27,13 @@ jobs:
       - name: Build core module
         run: npm run build
 
-      - name: Install sample project dependencies
+      - name: Install example project dependencies
+        working-directory: examples/example-javascript
         run: |
-          npm run prep-sample
+          npm run prep-example
           npm install
-        working-directory: sample
-      - name: Test sample project
-        working-directory: sample
+      - name: Test example project
+        working-directory: examples/example-javascript
         run: |
           export IMPOSTER_DOCKER_CONTAINERUSER="$(id -u)"
           npm test

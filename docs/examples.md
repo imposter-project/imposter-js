@@ -1,6 +1,6 @@
 ## Examples
 
-> See the [sample](https://github.com/imposter-project/imposter-js/tree/main/sample) directory for a Node.js project with many examples.
+> See the [examples](https://github.com/imposter-project/imposter-js/tree/main/examples) directory for a Node.js project with many examples.
 
 ### Example with Jest
 
