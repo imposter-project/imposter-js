@@ -1,6 +1,6 @@
 import {versionReader} from "./version";
 import {fileUtils} from "./fileutils";
-import {isLogVerbose, nodeConsole, setLogVerbose} from "./console";
+import {isLogVerbose, logger, setLogVerbose} from "./logger";
 import {ChildProcess, ChildProcessWithoutNullStreams, spawn} from "child_process";
 import path from "path";
 import fs from "fs";
@@ -40,7 +40,7 @@ export class ConfiguredMock {
         if (!this.port) {
             this.port = await this.utils.assignFreePort();
             if (isLogVerbose()) {
-                nodeConsole.debug(`Assigned free port ${this.port}`);
+                logger.debug(`Assigned free port ${this.port}`);
             }
         }
 
@@ -55,7 +55,7 @@ export class ConfiguredMock {
                 ];
                 if (localConfigFile) {
                     if (isLogVerbose()) {
-                        nodeConsole.debug(`Using project configuration: ${localConfigFile}`);
+                        logger.debug(`Using project configuration: ${localConfigFile}`);
                     }
                     args.push(`--config=${localConfigFile}`);
                 }
@@ -67,8 +67,8 @@ export class ConfiguredMock {
                     },
                 }
                 if (isLogVerbose()) {
-                    nodeConsole.debug(`Arguments: ${JSON.stringify(args)}`);
-                    nodeConsole.debug(`Environment: ${JSON.stringify(options.env)}`);
+                    logger.debug(`Arguments: ${JSON.stringify(args)}`);
+                    logger.debug(`Environment: ${JSON.stringify(options.env)}`);
                 }
                 const proc = spawn('imposter', args, options);
                 await this.listenForEvents(proc, reject);
@@ -87,7 +87,7 @@ export class ConfiguredMock {
     validateEnv(env: Record<string, string>) {
         for (const key in env) {
             if (!key.match(/IMPOSTER_.+/) && key !== "JAVA_TOOL_OPTIONS") {
-                nodeConsole.warn(`Environment variable ${key} does not match IMPOSTER_* or JAVA_TOOL_OPTIONS - this may be ignored by the mock engine`);
+                logger.warn(`Environment variable ${key} does not match IMPOSTER_* or JAVA_TOOL_OPTIONS - this may be ignored by the mock engine`);
             }
         }
     }
@@ -102,25 +102,25 @@ export class ConfiguredMock {
                 reject(new Error(`Imposter process terminated with code: ${code}.${advice}`));
             } else {
                 if (isLogVerbose()) {
-                    nodeConsole.debug('Imposter process terminated');
+                    logger.debug('Imposter process terminated');
                 }
             }
         });
         if (this.logToFile) {
             this.logFilePath = path.join(await fs.promises.mkdtemp(path.join(os.tmpdir(), 'imposter')), 'imposter.log');
             this.logFileStream = fs.createWriteStream(this.logFilePath);
-            nodeConsole.debug(`Logging to ${this.logFilePath}`);
+            logger.debug(`Logging to ${this.logFilePath}`);
         }
         proc.stdout.on('data', chunk => {
-            this.utils.writeChunk(chunk, isLogVerbose(), this.logToFile, nodeConsole.debug, this.logFileStream);
+            this.utils.writeChunk(chunk, isLogVerbose(), this.logToFile, logger.debug, this.logFileStream);
         });
         proc.stderr.on('data', chunk => {
-            this.utils.writeChunk(chunk, isLogVerbose(), this.logToFile, nodeConsole.warn, this.logFileStream);
+            this.utils.writeChunk(chunk, isLogVerbose(), this.logToFile, logger.warn, this.logFileStream);
         });
     }
 
     waitUntilReady = async (proc: ChildProcess) => {
-        nodeConsole.debug(`Waiting for mock server to come up on port ${this.port}`);
+        logger.debug(`Waiting for mock server to come up on port ${this.port}`);
         while (true) {
             if (proc.exitCode) {
                 const advice = this.utils.buildDebugAdvice(this.logToFile, isLogVerbose(), this.logFilePath);
@@ -129,7 +129,7 @@ export class ConfiguredMock {
             try {
                 const response = await httpGet(`http://127.0.0.1:${this.port}/system/status`);
                 if (response.status === 200) {
-                    nodeConsole.debug('Mock server is up!');
+                    logger.debug('Mock server is up!');
                     break
                 }
             } catch (ignored) {
@@ -140,13 +140,13 @@ export class ConfiguredMock {
 
     stop = () => {
         if (!this.proc || !this.proc.pid) {
-            nodeConsole.debug(`Mock server on port ${this.port} was not running`);
+            logger.debug(`Mock server on port ${this.port} was not running`);
         } else {
             try {
-                nodeConsole.debug(`Stopping mock server with pid ${this.proc.pid}`);
+                logger.debug(`Stopping mock server with pid ${this.proc.pid}`);
                 this.proc.kill();
             } catch (e) {
-                nodeConsole.warn(`Error stopping mock server with pid ${this.proc.pid}`, e);
+                logger.warn(`Error stopping mock server with pid ${this.proc.pid}`, e);
             }
         }
         if (this.logFileStream) {
@@ -206,7 +206,7 @@ export class Utils {
                 if (logFileWriter) {
                     logFileWriter.write(chunk);
                 } else {
-                    nodeConsole.warn(`No active log file stream - skipped writing mock output:\n${chunk}`);
+                    logger.warn(`No active log file stream - skipped writing mock output:\n${chunk}`);
                 }
             } catch (ignored) {
             }

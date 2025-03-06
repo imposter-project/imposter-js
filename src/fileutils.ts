@@ -1,7 +1,7 @@
 import path, {dirname} from "path";
 import fs, {constants} from "fs";
 import {versionReader} from "./version";
-import {nodeConsole} from "./console";
+import {logger} from "./logger";
 
 class FileUtils {
     private _initialised: boolean = false;
@@ -24,11 +24,11 @@ class FileUtils {
         if (typeof require !== 'undefined') {
             // CommonJS: Use module.paths
             paths = module.paths;
-            nodeConsole.trace("Searching module.paths for package.json, since using CommonJS");
+            logger.trace("Searching module.paths for package.json, since using CommonJS");
         } else {
             // not supported in ESM
             paths = [];
-            nodeConsole.trace("Skipping automatic package.json detection, since using ESM");
+            logger.trace("Skipping automatic package.json detection, since using ESM");
         }
         for (let path of paths) {
             try {

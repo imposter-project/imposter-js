@@ -1,7 +1,7 @@
 import typescript from "rollup-plugin-typescript2";
 
 export default {
-  external: ["child_process", "path", "fs", "http", "os", "net"],
+  external: ["child_process", "console", "path", "fs", "http", "os", "net"],
   input: "src/index.ts",
   output: [
     {

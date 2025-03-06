@@ -1,6 +1,6 @@
 import {MockBuilder} from "./mock-builder";
 import {ConfiguredMock} from "./configured-mock";
-import {setLogVerbose} from "./console";
+import {setLogVerbose} from "./logger";
 
 export class MockManager {
     private _mocks: ConfiguredMock[] = [];

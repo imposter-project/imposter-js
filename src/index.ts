@@ -1,10 +1,10 @@
-import {nodeConsole} from "./console";
+import {logger} from "./logger";
 import {MockManager} from "./mock-manager";
 
 const defaultMockManager = new MockManager();
 
 export default () => {
-    nodeConsole.warn(`Using the default export is deprecated.
+    logger.warn(`Using the default export is deprecated.
 Use:
   import {mocks} from '@imposterjs/imposter';
 or:

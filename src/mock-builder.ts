@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import os from "os";
-import {nodeConsole} from "./console";
+import {logger} from "./logger";
 import {ConfiguredMock} from "./configured-mock";
 import {MockManager} from "./mock-manager";
 
@@ -267,7 +267,7 @@ export class MockBuilder {
         fs.writeFileSync(mockConfigPath, mockConfig);
 
         const logContext = (options.logVerbose ? `config=${mockConfig}` : '');
-        nodeConsole.debug(`Wrote mock config to: ${mockConfigPath}`, logContext);
+        logger.debug(`Wrote mock config to: ${mockConfigPath}`, logContext);
 
         return this.mockManager.prepare(this.configDir, this.port, this.env);
     }

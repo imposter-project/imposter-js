@@ -1,9 +1,9 @@
 import {describe, expect, it} from '@jest/globals';
-import {nodeConsole} from "../console";
+import {logger} from "../logger";
 
 describe('console', () => {
     it('returns the console', () => {
-        expect(nodeConsole).toBeTruthy();
-        expect(nodeConsole.info).toBeTruthy();
+        expect(logger).toBeTruthy();
+        expect(logger.info).toBeTruthy();
     });
 });
