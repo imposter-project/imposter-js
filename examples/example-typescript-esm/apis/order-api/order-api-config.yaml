@@ -1,0 +1,8 @@
+plugin: openapi
+specFile: order-api.yaml
+
+resources:
+  - path: /orders
+    method: post
+    response:
+      scriptFile: order-api.js

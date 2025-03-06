@@ -1,5 +1,5 @@
-Sample project for Imposter with Jest
-=====================================
+Sample project for Imposter with Jest, using TypeScript and ECMAScript modules (ESM)
+=====================================================================================
 
 ## Prerequisites
 
@@ -41,8 +41,8 @@ The directory also contains Imposter configuration files, but no dynamic scripts
 
 ### user-api
 
-A mock defined entirely within the [Jest test](src/__tests__/users.test.js) - no OpenAPI specification, no Imposter configuration - all configured within the Jest test.
+A mock defined entirely within the [Jest test](src/__tests__/users.test.ts) - no OpenAPI specification, no Imposter configuration - all configured within the Jest test.
 
 ## Application details
 
-A simple application is defined in `index.js` that chains calls for some of the above services.
+A simple application is defined in `index.ts` that chains calls for some of the above services.
