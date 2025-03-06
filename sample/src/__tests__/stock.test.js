@@ -1,4 +1,4 @@
-import {StockService} from "./stock";
+import {StockService} from "../stock.js";
 import {afterAll, beforeAll, expect, it, jest} from '@jest/globals';
 import {mocks} from "@imposter-js/imposter";
 
@@ -20,7 +20,7 @@ describe('stock service', () => {
     let stockService;
 
     beforeAll(async () => {
-        const configDir = `${__dirname}/../apis/stock-api`;
+        const configDir = `${__dirname}/../../apis/stock-api`;
         const mock = await mocks.start(configDir);
 
         // set the base URL for the service

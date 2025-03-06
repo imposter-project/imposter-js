@@ -1,5 +1,5 @@
 import {afterAll, beforeAll, expect, it, jest} from '@jest/globals';
-import {OrderService} from "./orders";
+import {OrderService} from "../orders.js";
 import {mocks} from "@imposter-js/imposter";
 
 /**
@@ -21,7 +21,7 @@ describe('order service', () => {
     let orderService;
 
     beforeAll(async () => {
-        const configDir = `${__dirname}/../apis/order-api`;
+        const configDir = `${__dirname}/../../apis/order-api`;
         const mock = await mocks.start(configDir);
 
         // set the base URL for the service

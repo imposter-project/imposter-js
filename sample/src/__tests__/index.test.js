@@ -1,4 +1,4 @@
-import {PetStore} from "./index";
+import {PetStore} from "../index.js";
 import {afterAll, beforeAll, expect, it, jest} from '@jest/globals';
 import {mocks} from "@imposter-js/imposter";
 
@@ -27,7 +27,7 @@ describe('petstore application', () => {
         // spin up a mock for each API
         const mockPromises = {};
         for (const apiName of apisToMock) {
-            const configDir = `${__dirname}/../apis/${apiName}-api`;
+            const configDir = `${__dirname}/../../apis/${apiName}-api`;
             mockPromises[apiName] = mocks.start(configDir);
         }
 

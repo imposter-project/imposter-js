@@ -6,7 +6,7 @@ module.exports = {
 
     testEnvironment: "node",
     testMatch: [
-        "<rootDir>/src/**/*.test.js",
+        "<rootDir>/src/**/__tests__/**/*.test.js",
     ],
 
     maxWorkers: 2,

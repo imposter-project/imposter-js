@@ -41,7 +41,7 @@ The directory also contains Imposter configuration files, but no dynamic scripts
 
 ### user-api
 
-A mock defined entirely within the [Jest test](./src/users.test.js) - no OpenAPI specification, no Imposter configuration - all configured within the Jest test.
+A mock defined entirely within the [Jest test](src/__tests__/users.test.js) - no OpenAPI specification, no Imposter configuration - all configured within the Jest test.
 
 ## Application details
 

@@ -1,4 +1,4 @@
-import {PetNameService} from "./petnames";
+import {PetNameService} from "../petnames.js";
 import {afterAll, beforeAll, expect, it, jest} from '@jest/globals';
 import {mocks} from "@imposter-js/imposter";
 
@@ -20,7 +20,7 @@ describe('pet name service', () => {
     let petNameService;
 
     beforeAll(async () => {
-        const specPath = `${__dirname}/../apis/pet-name-api/pet-name-api.yaml`;
+        const specPath = `${__dirname}/../../apis/pet-name-api/pet-name-api.yaml`;
 
         // build a mock from a bare OpenAPI spec file
         const mock = await mocks.builder()

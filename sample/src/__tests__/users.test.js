@@ -1,4 +1,4 @@
-import {UserService} from "./users";
+import {UserService} from "../users.js";
 import {afterAll, beforeAll, expect, it, jest} from '@jest/globals';
 import {mocks} from "@imposter-js/imposter";
 
