@@ -21,8 +21,6 @@ export default tseslint.config(
       },
     },
     rules: {
-      // TODO: to be re-enforced soon!
-      "@typescript-eslint/no-explicit-any": "off",
       // to enforce using type for object type definitions, can be type or interface
       "@typescript-eslint/consistent-type-definitions": ["warn", "type"],
     },

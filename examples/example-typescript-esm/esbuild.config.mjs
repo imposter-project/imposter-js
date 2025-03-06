@@ -1,6 +1,5 @@
 import * as esbuild from "esbuild";
 import { spawn } from "node:child_process";
-import { readFileSync } from "node:fs";
 import * as console from "node:console";
 import commandLineArgs from "command-line-args";
 
@@ -53,9 +52,6 @@ const buildOptions = {
   outfile: OUTPUT_FILE,
   sourcemap: true,
   treeShaking: true,
-  banner: {
-    js: readFileSync("./src/utils/esm-polyfills/require.ts", "utf8"),
-  },
 };
 
 if (options.watch) {
@@ -63,12 +59,12 @@ if (options.watch) {
     ...buildOptions,
     plugins,
   });
-  console.log("Watching backend app...");
+  console.log("Watching example app...");
   await ctx.watch();
 } else {
-  console.log("Building backend app...");
+  console.log("Building example app...");
   await esbuild.build({
     ...buildOptions,
   });
-  console.log("Backend app built!");
+  console.log("Example app built!");
 }

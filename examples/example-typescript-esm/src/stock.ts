@@ -15,7 +15,7 @@ class StockService {
      * Fetch available products.
      */
     async listStock(): Promise<Stock[]> {
-        const response = await axios.get<any, AxiosResponse<Stock[]>>(`${this.baseUrl}/products`);
+        const response = await axios.get<void, AxiosResponse<Stock[]>>(`${this.baseUrl}/products`);
         console.log(`products:`, response.data);
         return response.data;
     }

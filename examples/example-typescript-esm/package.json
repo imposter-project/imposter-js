@@ -1,9 +1,13 @@
 {
   "name": "example-esm",
   "version": "0.1.0",
-  "description": "Example import",
+  "description": "Sample application for integrated tests with Imposter using TypeScript and ESM.",
   "module": "dist/index.js",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imposter-project/imposter-js.git"
+  },
   "scripts": {
     "clean": "rimraf dist",
     "build": "export NODE_ENV=production && npm run clean && npm run lint && tsc -p tsconfig.app.json && node esbuild.config.mjs",
@@ -12,7 +16,7 @@
     "test": "cross-env NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" jest"
   },
   "author": "Imposter Project",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "devDependencies": {
     "@eslint/js": "^9.20.0",
     "@imposter-js/imposter": "*",
@@ -38,5 +42,8 @@
   },
   "dependencies": {
     "axios": "^1.8.1"
+  },
+  "engines": {
+    "node": ">=20.0.0"
   }
 }

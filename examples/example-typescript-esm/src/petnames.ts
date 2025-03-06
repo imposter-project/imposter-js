@@ -14,7 +14,7 @@ class PetNameService {
      * Suggest names.
      */
     async suggestNames(): Promise<string[]> {
-        const response = await axios.get<any, AxiosResponse<string[]>>(`${this.baseUrl}/names`);
+        const response = await axios.get<void, AxiosResponse<string[]>>(`${this.baseUrl}/names`);
         console.log(`names:`, response.data);
         return response.data;
     }

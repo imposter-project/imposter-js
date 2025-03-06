@@ -5,7 +5,7 @@ export default {
   ...createDefaultEsmPreset({
     tsconfig: "tsconfig.test.json",
   }),
-  testMatch: ["**/__tests__/**/*.(spec|test).(js|ts)"],
+  testMatch: ["**/__tests__/**/*.(spec|test).ts"],
   testEnvironment: "node",
   collectCoverage: false,
   coverageProvider: "v8",
