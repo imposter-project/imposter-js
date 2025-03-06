@@ -15,7 +15,7 @@
   },
   "types": "esm/index.d.ts",
   "scripts": {
-    "build": "npm run clean && rollup -c && cp package.json dist/package.json",
+    "build": "npm run clean && rollup -c && cp package.json README.md dist/package.json",
     "clean": "rimraf ./dist",
     "release": "npm test && npm run build && npm publish --access public",
     "test": "jest"
