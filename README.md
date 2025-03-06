@@ -148,6 +148,7 @@ console.log(response.data);
 
 * run standalone mocks in place of real systems
 * turn an OpenAPI/Swagger file into a mock API for testing or QA (even before the real API is built)
+* turn a SOAP/WSDL file into a mock API you can run locally or in your CI/CD pipeline
 * decouple your integration tests from the cloud/various back-end systems and take control of your dependencies
 * validate your API requests against an OpenAPI specification
 
