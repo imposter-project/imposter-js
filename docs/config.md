@@ -2,8 +2,8 @@
 
 Imposter supports different mock engine types: Docker (default) and JVM. For more information about configuring the engine type see:
 
-- [Docker engine](https://github.com/gatehill/imposter-cli/blob/main/docs/docker_engine.md) (default)
-- [JVM engine](https://github.com/gatehill/imposter-cli/blob/main/docs/jvm_engine.md)
+- [Docker engine](https://github.com/imposter-project/imposter-cli/blob/main/docs/docker_engine.md) (default)
+- [JVM engine](https://github.com/imposter-project/imposter-cli/blob/main/docs/jvm_engine.md)
 
 ## User defaults
 
@@ -11,7 +11,7 @@ Default mock engine configuration can be set in your home directory, under the f
 
     $HOME/.imposter/config.yaml
 
-See [configuration options](https://github.com/gatehill/imposter-cli/blob/main/docs/config.md) for this file.
+See [configuration options](https://github.com/imposter-project/imposter-cli/blob/main/docs/config.md) for this file.
 
 ## Project-specific configuration
 

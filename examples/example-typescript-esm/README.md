@@ -4,7 +4,7 @@ Sample project for Imposter with Jest, using TypeScript and ECMAScript modules (
 ## Prerequisites
 
 - Node.js 20+
-- [Imposter CLI](https://github.com/gatehill/imposter-cli)
+- [Imposter CLI](https://github.com/imposter-project/imposter-cli)
 
 **Important:** Ensure you have built the parent module, on which this sample depends:
 
