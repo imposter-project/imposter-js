@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [2.1.5] - 2025-03-11
+### Changed
+- chore(deps): bump axios in /examples/example-typescript-esm
+- chore(deps): bump softprops/action-gh-release from 1 to 2
+- chore(deps-dev): bump axios from 1.8.1 to 1.8.2
+- chore(deps-dev): bump rollup from 4.34.9 to 4.35.0
+- docs: tidies up ESM example.
+- docs: updates GitHub org to imposter-project.
+
 ## [2.1.4] - 2025-03-06
 ### Changed
 - build: fix copy to dist.
