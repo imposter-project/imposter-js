@@ -4,9 +4,11 @@ import {setLogVerbose} from "./logger";
 
 export class MockManager {
     private _mocks: ConfiguredMock[] = [];
+    private _printLogOnCrash = false;
 
     prepare = (configDir: string, port: number | null = null, env: Record<string, string> = {}, projectRootDir: string | null = null): ConfiguredMock => {
         const mock = new ConfiguredMock(configDir, port, env, projectRootDir);
+        mock.printLogInDebugAdvice = this._printLogOnCrash;
         this._mocks.push(mock);
         return mock;
     }
@@ -35,6 +37,11 @@ export class MockManager {
 
     verbose = (): MockManager => {
         setLogVerbose(true);
+        return this;
+    }
+
+    printLogOnCrash(): MockManager {
+        this._printLogOnCrash = true;
         return this;
     }
 }

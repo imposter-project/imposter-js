@@ -13,6 +13,7 @@ export class ConfiguredMock {
     port: number | null;
     env: Record<string, string>;
     logToFile = true;
+    printLogInDebugAdvice = false;
     logFileStream: fs.WriteStream | null = null;
     proc?: ChildProcess;
     logFilePath?: string;
@@ -98,7 +99,7 @@ export class ConfiguredMock {
 
         }).on('close', (code) => {
             if (code !== 0) {
-                const advice = this.utils.buildDebugAdvice(this.logToFile, isLogVerbose(), this.logFilePath);
+                const advice = this.utils.buildDebugAdvice(this.logToFile, isLogVerbose(), this.logFilePath, this.printLogInDebugAdvice);
                 reject(new Error(`Imposter process terminated with code: ${code}.${advice}`));
             } else {
                 if (isLogVerbose()) {
@@ -123,7 +124,7 @@ export class ConfiguredMock {
         logger.debug(`Waiting for mock server to come up on port ${this.port}`);
         while (true) {
             if (proc.exitCode) {
-                const advice = this.utils.buildDebugAdvice(this.logToFile, isLogVerbose(), this.logFilePath);
+                const advice = this.utils.buildDebugAdvice(this.logToFile, isLogVerbose(), this.logFilePath, this.printLogInDebugAdvice);
                 throw new Error(`Failed to start mock engine on port ${this.port}. Exit code: ${proc.exitCode}${advice}`);
             }
             try {
@@ -180,10 +181,23 @@ interface LogFileWriter {
 }
 
 export class Utils {
-    buildDebugAdvice = (logToFile: boolean, logVerbose: boolean, logFilePath?: string) => {
+    buildDebugAdvice = (logToFile: boolean, logVerbose: boolean, logFilePath: string | undefined, printLogInDebugAdvice: boolean) => {
         let advice = '';
         if (logToFile) {
             advice += `\nSee log file: ${logFilePath}`;
+            if (printLogInDebugAdvice) {
+                advice += "\n" + "-".repeat(40) + "\n";
+                if (!logFilePath) {
+                    advice += `\nLog file path is not set. Cannot read log content.`;
+                } else {
+                    try {
+                        advice += fs.readFileSync(logFilePath, 'utf-8');
+                    } catch (e) {
+                        advice += `Failed to read log file ${logFilePath}: ${e}`;
+                    }
+                }
+                advice += "\n" + "-".repeat(40)
+            }
         }
         if (!logVerbose) {
             advice += '\nConsider setting .verbose() on your mock for more details.';

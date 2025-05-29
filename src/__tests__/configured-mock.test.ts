@@ -2,10 +2,13 @@ import {beforeAll, expect, it} from '@jest/globals';
 import {Utils} from "../configured-mock";
 import {versionReader} from "../version";
 import net from "net";
+import fs from "fs";
+import path from "path";
+import os from "os";
 
 /**
  * The majority of coverage for `ConfiguredMock` comes via
- * the `MockBuilder` tests and the end to end tests.
+ * the `MockBuilder` tests and the end-to-end tests.
  */
 
 const utils = new Utils();
@@ -20,7 +23,23 @@ See log file: /tmp/example
 Consider setting .verbose() on your mock for more details.
 Run 'imposter doctor' to diagnose engine issues.`
 
-    expect(utils.buildDebugAdvice(true, false, '/tmp/example')).toEqual(expected);
+    expect(utils.buildDebugAdvice(true, false, '/tmp/example', false)).toEqual(expected);
+});
+
+it('generates debug advice with log', async () => {
+    const tempDir = await fs.promises.mkdtemp(path.join(os.tmpdir(), 'test-'));
+    const tempFilePath = path.join(tempDir, 'log.txt');
+    await fs.promises.writeFile(tempFilePath, 'Example log');
+
+    const expected = `
+See log file: ${tempFilePath}
+----------------------------------------
+Example log
+----------------------------------------
+Consider setting .verbose() on your mock for more details.
+Run 'imposter doctor' to diagnose engine issues.`
+
+    expect(utils.buildDebugAdvice(true, false, tempFilePath, true)).toEqual(expected);
 });
 
 it('writes chunk to console', async () => {
