@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [2.3.2] - 2025-06-30
+### Changed
+- chore(deps): bump axios in /examples/example-javascript
+- chore(deps-dev): bump axios from 1.8.2 to 1.10.0
+- chore(deps-dev): bump rollup from 4.35.0 to 4.44.0
+- chore(deps-dev): bump ts-jest from 29.2.6 to 29.4.0
+- chore(deps-dev): bump typescript from 5.8.2 to 5.8.3
+
 ## [2.3.1] - 2025-06-30
 ### Changed
 - chore: bumps Imposter engine to 4.6.8.
