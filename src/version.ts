@@ -1,4 +1,5 @@
 import {spawn} from "child_process";
+import {logger} from "./logger";
 
 type SemanticVersion = { major: number; minor: number; revision: number; };
 
@@ -9,12 +10,22 @@ class VersionReader {
 
     initIfRequired = async () => {
         if (!this._initialised) {
-            this._versionOutput = await this.invokeVersionCommand();
+            this._versionOutput = await this.invokeVersionCommandWithFallback();
             this._initialised = true;
         }
     }
 
-    invokeVersionCommand = async (): Promise<string> => {
+    invokeVersionCommandWithFallback = async (): Promise<string> => {
+        try {
+            return await this.invokeVersionCommand(true);
+        } catch (e) {
+            logger.trace(`Failed to determine version using short version command format - retrying (${e}`)
+            // CLI versions before 1.2.0 don't support the --cli argument
+            return await this.invokeVersionCommand(false)
+        }
+    }
+
+    invokeVersionCommand = async (cliOnly: boolean): Promise<string> => {
         return new Promise((resolve, reject) => {
             try {
                 const options = {
@@ -23,7 +34,11 @@ class VersionReader {
                         "LOG_LEVEL": "INFO"
                     }
                 };
-                const proc = spawn('imposter', ['version'], options);
+                const args = ['version'];
+                if (cliOnly) {
+                    args.push("--cli")
+                }
+                const proc = spawn('imposter', args, options);
                 let output = '';
 
                 proc.on('error', err => {
