@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [2.3.1] - 2025-06-30
+### Changed
+- chore: bumps Imposter engine to 4.6.8.
+- refactor: removes unneeded CLI version flag.
+
 ## [2.3.0] - 2025-06-30
 ### Added
 - feat: prefer short CLI version command.
