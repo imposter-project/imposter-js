@@ -15,7 +15,7 @@ jobs:
         uses: imposter-project/imposter-github-action/setup@v0.6.1
       - name: Pull engine
         run: |
-          imposter engine pull --version 4.5.8
+          imposter engine pull --version 4.6.8
           imposter engine pull --version latest
 
       - name: Install core module dependencies
@@ -46,7 +46,7 @@ jobs:
         uses: imposter-project/imposter-github-action/setup@v0.6.1
       - name: Pull engine
         run: |
-          imposter engine pull --version 4.5.8
+          imposter engine pull --version 4.6.8
           imposter engine pull --version latest
 
       - name: Install core module dependencies

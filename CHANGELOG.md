@@ -67,7 +67,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - build: use normalised form for repository URL.
 - build: use since for releases.
 - chore(deps): bump typescript to 5.8.2
-- chore(deps): bumps Imposter to 4.5.8.
+- chore(deps): bumps Imposter to 4.6.8.
 - chore(deps): bumps actions/checkout to v4.
 - chore(deps): bumps actions/setup-node to v4.
 - chore(deps-dev): bump ts-jest from 29.1.2 to 29.2.6
