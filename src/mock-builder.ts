@@ -8,8 +8,8 @@ import {MockManager} from "./mock-manager";
 type ResponseConfig = {
     statusCode?: number;
     headers?: Record<string, string>;
-    staticFile?: string;
-    staticData?: string;
+    file?: string;
+    content?: string;
     template?: boolean;
     exampleName?: string;
 };
@@ -58,7 +58,7 @@ class ResourceResponse {
     }
 
     withData = (data: string): ResourceResponse => {
-        this.response.staticData = data;
+        this.response.content = data;
         return this;
     }
 
@@ -90,7 +90,7 @@ class ResourceResponse {
     }
 
     withFile = (filePath: string): ResourceResponse => {
-        this.response.staticFile = filePath;
+        this.response.file = filePath;
         return this;
     }
 }

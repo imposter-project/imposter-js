@@ -41,7 +41,7 @@ describe('mock builder', () => {
                     method: 'POST',
                     response: {
                         statusCode: 201,
-                        staticData: 'Hello world'
+                        content: 'Hello world'
                     }
                 }
             ]

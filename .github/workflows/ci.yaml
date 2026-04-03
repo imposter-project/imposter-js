@@ -5,6 +5,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - engine: docker
+            version: '4.9.1'
+          - engine: golang
+            version: '5.14.2'
+    name: build (${{ matrix.engine }})
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
@@ -14,9 +23,12 @@ jobs:
       - name: Install Imposter
         uses: imposter-project/imposter-github-action/setup@v0.6.1
       - name: Pull engine
+        run: imposter engine pull --engine-type ${{ matrix.engine }} --version ${{ matrix.version }}
+
+      - name: Configure engine
         run: |
-          imposter engine pull --version 4.9.1
-          imposter engine pull --version latest
+          echo '{"engine":"${{ matrix.engine }}","version":"${{ matrix.version }}"}' > imposter.config.json
+          cat imposter.config.json
 
       - name: Install core module dependencies
         run: npm install
@@ -28,7 +40,7 @@ jobs:
         run: npm run build
 
       - name: Upload artifact
-        if: startsWith(github.ref, 'refs/tags/')
+        if: startsWith(github.ref, 'refs/tags/') && matrix.engine == 'docker'
         uses: actions/upload-artifact@v7
         with:
           name: dist
@@ -36,6 +48,15 @@ jobs:
 
   test-examples:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - engine: docker
+            version: '4.9.1'
+          - engine: golang
+            version: '5.14.2'
+    name: test-examples (${{ matrix.engine }})
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
@@ -45,9 +66,13 @@ jobs:
       - name: Install Imposter
         uses: imposter-project/imposter-github-action/setup@v0.6.1
       - name: Pull engine
+        run: imposter engine pull --engine-type ${{ matrix.engine }} --version ${{ matrix.version }}
+
+      - name: Configure engine
         run: |
-          imposter engine pull --version 4.9.1
-          imposter engine pull --version latest
+          for config in imposter.config.json examples/*/imposter.config.json; do
+            echo '{"engine":"${{ matrix.engine }}","version":"${{ matrix.version }}"}' > "$config"
+          done
 
       - name: Install core module dependencies
         run: npm install
