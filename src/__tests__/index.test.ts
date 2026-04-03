@@ -1,6 +1,5 @@
 import {afterAll, describe, expect, it} from '@jest/globals';
 import {mocks} from "../index";
-import axios from "axios";
 import {MockManager} from "../mock-manager";
 
 mocks.verbose();
@@ -14,10 +13,10 @@ describe('end to end tests', () => {
         const configDir = `${__dirname}/test_data/full_config`;
         const mock = await mocks.start(configDir, 8080);
 
-        const response = await axios.get(`${mock.baseUrl()}/products`);
+        const response = await fetch(`${mock.baseUrl()}/products`);
         expect(response.status).toEqual(200);
 
-        const products = response.data;
+        const products = await response.json() as any[];
         expect(products).toHaveLength(2);
         expect(products[0].name).toEqual('Food bowl');
     });
@@ -32,10 +31,10 @@ describe('end to end tests', () => {
 
         await mock.start();
 
-        const response = await axios.get(`${mock.baseUrl()}/names`);
+        const response = await fetch(`${mock.baseUrl()}/names`);
         expect(response.status).toEqual(200);
 
-        const names = response.data;
+        const names = await response.json() as string[];
         expect(names).toHaveLength(2);
         expect(names[0]).toEqual('Fluffy');
     });
@@ -53,9 +52,9 @@ describe('end to end tests', () => {
         const mock = builder.build({logVerbose: true});
         await mock.start();
 
-        const response = await axios.post(`${mock.baseUrl()}/users/alice`);
+        const response = await fetch(`${mock.baseUrl()}/users/alice`, { method: 'POST' });
         expect(response.status).toEqual(201);
-        expect(response.data).toEqual('Hello alice');
+        expect(await response.text()).toEqual('Hello alice');
     });
 
     it('starts a mock on random free port', async () => {
@@ -66,9 +65,9 @@ describe('end to end tests', () => {
         // port should be auto-assigned
         expect(mock.port).toBeTruthy();
 
-        const response = await axios.get(`${mock.baseUrl()}/example`);
+        const response = await fetch(`${mock.baseUrl()}/example`);
         expect(response.status).toEqual(200);
-        expect(response.data).toEqual('Hello world');
+        expect(await response.text()).toEqual('Hello world');
     });
 
     it('builds a mock from raw config', async () => {
@@ -93,9 +92,9 @@ describe('end to end tests', () => {
 
         await mock.start();
 
-        const response = await axios.post(`${mock.baseUrl()}/example`);
+        const response = await fetch(`${mock.baseUrl()}/example`, { method: 'POST' });
         expect(response.status).toEqual(201);
-        expect(response.data).toEqual('Hello world');
+        expect(await response.text()).toEqual('Hello world');
     });
 
     it('returns an environment variable', async () => {
@@ -123,9 +122,9 @@ describe('end to end tests', () => {
 
         await mock.start();
 
-        const response = await axios.get(`${mock.baseUrl()}/env`);
+        const response = await fetch(`${mock.baseUrl()}/env`);
         expect(response.status).toEqual(200);
-        expect(response.data).toEqual('foo');
+        expect(await response.text()).toEqual('foo');
     });
 
     it('returns deprecated manager', async () => {

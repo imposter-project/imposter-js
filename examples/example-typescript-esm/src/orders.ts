@@ -1,4 +1,3 @@
-import axios, {AxiosResponse} from "axios";
 import {Order, OrderConfirmation} from "./model";
 
 /**
@@ -18,9 +17,13 @@ class OrderService {
         if (!orderItems || orderItems.length === 0) {
             throw new Error('Must provide at least one order item');
         }
-        const response = await axios.post<Order[], AxiosResponse<OrderConfirmation>>(`${this.baseUrl}/orders`, orderItems);
+        const response = await fetch(`${this.baseUrl}/orders`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(orderItems),
+        });
         console.log(`returned: ${response.status} ${response.statusText}`);
-        return response.data;
+        return await response.json() as OrderConfirmation;
     }
 }
 

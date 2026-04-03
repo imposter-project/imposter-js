@@ -1,5 +1,3 @@
-import axios from "axios";
-
 /**
  * Calls the
  */
@@ -11,9 +9,10 @@ class UserService {
     }
 
     async addUser(userName) {
-        const response = await axios.post(`${this.baseUrl}/users/${userName}`);
-        console.log(`add user response:`, response.data);
-        return response.data;
+        const response = await fetch(`${this.baseUrl}/users/${userName}`, { method: 'POST' });
+        const data = await response.text();
+        console.log(`add user response:`, data);
+        return data;
     }
 }
 
