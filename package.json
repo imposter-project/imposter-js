@@ -36,13 +36,13 @@
   "author": "Pete Cornish",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@jest/globals": "^29.7.0",
-    "jest": "^29.7.0",
+    "@jest/globals": "^30.3.0",
+    "jest": "^30.3.0",
     "rimraf": "^6.0.1",
     "rollup": "^4.34.8",
-    "rollup-plugin-typescript2": "^0.36.0",
+    "rollup-plugin-typescript2": "^0.37.0",
     "ts-jest": "^29.2.6",
-    "typescript": "^5.8.2"
+    "typescript": "^6.0.2"
   },
   "engines": {
     "node": ">=20.0.0"
