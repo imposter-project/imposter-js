@@ -74,6 +74,17 @@ jobs:
           export IMPOSTER_DOCKER_CONTAINERUSER="$(id -u)"
           npm test
 
+      - name: Install example-vitest project dependencies
+        working-directory: examples/example-vitest
+        run: |
+          npm run prep-example
+          npm install
+      - name: Test example-vitest project
+        working-directory: examples/example-vitest
+        run: |
+          export IMPOSTER_DOCKER_CONTAINERUSER="$(id -u)"
+          npm test
+
   release:
     needs: [build, test-examples]
     if: startsWith(github.ref, 'refs/tags/')
