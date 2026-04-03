@@ -6,6 +6,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [2.4.0] - 2026-04-03
+### Added
+- feat: add Vitest example (#85)
+
+### Changed
+- chore(deps): bump actions group (checkout v6, upload-artifact v7, download-artifact v8)
+- chore(deps): bump actions/download-artifact from 4 to 6
+- chore(deps): bump actions/setup-node from 4 to 6
+- chore(deps): bump actions/upload-artifact from 4 to 5
+- chore(deps): bump form-data from 4.0.0 to 4.0.4 in example-javascript
+- chore(deps): bump js-yaml from 3.14.1 to 3.14.2
+- chore(deps): bump minimatch from 9.0.5 to 9.0.9 in example-typescript-esm
+- chore(deps): bump transitive deps in example-typescript-esm
+- chore(deps-dev): bump rollup from 4.44.0 to 4.60.1
+- chore: add dependabot grouping (#90)
+- refactor: replace axios with native fetch API (#93)
+
 ## [2.3.2] - 2025-06-30
 ### Changed
 - chore(deps): bump axios in /examples/example-javascript
