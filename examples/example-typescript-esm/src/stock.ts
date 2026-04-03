@@ -1,4 +1,3 @@
-import axios, {AxiosResponse} from "axios";
 import {Stock} from "./model";
 
 /**
@@ -15,9 +14,10 @@ class StockService {
      * Fetch available products.
      */
     async listStock(): Promise<Stock[]> {
-        const response = await axios.get<void, AxiosResponse<Stock[]>>(`${this.baseUrl}/products`);
-        console.log(`products:`, response.data);
-        return response.data;
+        const response = await fetch(`${this.baseUrl}/products`);
+        const products = await response.json() as Stock[];
+        console.log(`products:`, products);
+        return products;
     }
 }
 

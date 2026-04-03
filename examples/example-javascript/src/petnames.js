@@ -1,5 +1,3 @@
-import axios from "axios";
-
 /**
  * Calls the Pet Name API to suggest pet names.
  */
@@ -16,9 +14,10 @@ class PetNameService {
      * @returns {Promise<string[]>}
      */
     async suggestNames() {
-        const response = await axios.get(`${this.baseUrl}/names`);
-        console.log(`names:`, response.data);
-        return response.data;
+        const response = await fetch(`${this.baseUrl}/names`);
+        const names = await response.json();
+        console.log(`names:`, names);
+        return names;
     }
 }
 

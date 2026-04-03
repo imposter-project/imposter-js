@@ -1,5 +1,3 @@
-import axios from "axios";
-
 /**
  * Calls the Stock API to fetch available products.
  */
@@ -16,9 +14,10 @@ class StockService {
      * @returns {Promise<any>}
      */
     async listStock() {
-        const response = await axios.get(`${this.baseUrl}/products`);
-        console.log(`products:`, response.data);
-        return response.data;
+        const response = await fetch(`${this.baseUrl}/products`);
+        const products = await response.json();
+        console.log(`products:`, products);
+        return products;
     }
 }
 

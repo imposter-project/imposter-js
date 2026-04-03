@@ -1,5 +1,3 @@
-import axios from "axios";
-
 /**
  * Calls the Order API to place orders.
  */
@@ -20,9 +18,13 @@ class OrderService {
         if (!orderItems || orderItems.length === 0) {
             throw new Error('Must provide at least one order item');
         }
-        const response = await axios.post(`${this.baseUrl}/orders`, orderItems);
+        const response = await fetch(`${this.baseUrl}/orders`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(orderItems),
+        });
         console.log(`returned: ${response.status} ${response.statusText}`);
-        return response.data;
+        return await response.json();
     }
 }
 
