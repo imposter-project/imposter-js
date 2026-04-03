@@ -24,7 +24,7 @@ console.log(response.data);
 
 This is just a simple example. Your mocks can have dynamic responses, request validation against an OpenAPI schema, data capture, performance delays etc...
 
-> See the [examples](https://github.com/imposter-project/imposter-js/tree/main/examples) directory for a Node.js project with many examples.
+> See the [Examples](#examples) section for complete sample projects.
 
 ## Quickstart
 
@@ -52,7 +52,11 @@ Or add to your `package.json` as a dev dependency:
 
 ## Examples
 
-> See the [examples](https://github.com/imposter-project/imposter-js/tree/main/examples) directory for a Node.js project with many examples.
+The following example projects are available:
+
+- [JavaScript with Jest](https://github.com/imposter-project/imposter-js/tree/main/examples/example-javascript)
+- [TypeScript (ESM) with Jest](https://github.com/imposter-project/imposter-js/tree/main/examples/example-typescript-esm)
+- [TypeScript with Vitest](https://github.com/imposter-project/imposter-js/tree/main/examples/example-vitest)
 
 ### Example with Jest
 
@@ -163,3 +167,4 @@ This project is only possible thanks to the following:
 
 - [Imposter](https://www.imposter.sh)
 - [Jest](https://jestjs.io/)
+- [Vitest](https://vitest.dev/)
