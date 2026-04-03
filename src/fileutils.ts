@@ -21,7 +21,7 @@ class FileUtils {
      */
     private async detectPackageJsonDir(): Promise<string | null> {
         let paths: string[];
-        if (typeof require !== 'undefined') {
+        if (typeof require !== 'undefined' && typeof module !== 'undefined' && Array.isArray(module.paths)) {
             // CommonJS: Use module.paths
             paths = module.paths;
             logger.trace("Searching module.paths for package.json, since using CommonJS");
