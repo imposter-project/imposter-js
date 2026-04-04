@@ -1,6 +1,6 @@
 {
   "name": "@imposter-js/imposter",
-  "version": "2.4.1",
+  "version": "2.5.0",
   "description": "Run integrated tests with Imposter.",
   "type": "module",
   "repository": {
