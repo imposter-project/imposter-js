@@ -12,7 +12,7 @@ jobs:
           - engine: docker
             version: '4.9.1'
           - engine: golang
-            version: '5.14.3'
+            version: '5.14.5'
     name: build (${{ matrix.engine }})
     steps:
       - uses: actions/checkout@v6
@@ -55,7 +55,7 @@ jobs:
           - engine: docker
             version: '4.9.1'
           - engine: golang
-            version: '5.14.3'
+            version: '5.14.5'
     name: test-examples (${{ matrix.engine }})
     steps:
       - uses: actions/checkout@v6

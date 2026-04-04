@@ -12,7 +12,9 @@ var confirmation = {
     total: total,
 };
 
-stores.open('request').save('responseBody', JSON.stringify(confirmation));
+respond()
+    .withStatusCode(201)
+    .withContent(JSON.stringify(confirmation));
 
 function calculatePrice(sku) {
     var hash = 1;

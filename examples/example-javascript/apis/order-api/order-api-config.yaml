@@ -7,7 +7,3 @@ resources:
     steps:
       - type: script
         file: order-api.js
-    response:
-      statusCode: 201
-      content: "${stores.request.responseBody}"
-      template: true
