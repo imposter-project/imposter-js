@@ -1,5 +1,5 @@
 var body = context.request.body;
-logger.debug('received order: ' + body);
+console.log('received order: ' + body);
 
 var orderItems = JSON.parse(body);
 
@@ -13,8 +13,8 @@ var confirmation = {
 };
 
 respond()
-    .withData(JSON.stringify(confirmation))
-    .withStatusCode(201);
+    .withStatusCode(201)
+    .withContent(JSON.stringify(confirmation));
 
 function calculatePrice(sku) {
     var hash = 1;

@@ -79,7 +79,7 @@ describe('end to end tests', () => {
                     method: 'POST',
                     response: {
                         statusCode: 201,
-                        staticData: 'Hello world'
+                        content: 'Hello world'
                     }
                 }
             ]
@@ -106,7 +106,7 @@ describe('end to end tests', () => {
                     method: 'GET',
                     response: {
                         statusCode: 200,
-                        staticData: '${env.IMPOSTER_TEST_VAR}',
+                        content: '${env.IMPOSTER_TEST_VAR}',
                         template: true
                     }
                 }

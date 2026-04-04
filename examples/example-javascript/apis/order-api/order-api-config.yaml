@@ -4,5 +4,6 @@ specFile: order-api.yaml
 resources:
   - path: /orders
     method: post
-    response:
-      scriptFile: order-api.js
+    steps:
+      - type: script
+        file: order-api.js
