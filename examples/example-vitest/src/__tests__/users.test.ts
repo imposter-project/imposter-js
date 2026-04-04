@@ -30,7 +30,7 @@ describe('user service', () => {
         // respond with a templated message indicating the user
         // was created by name
         resource.responds(201)
-            .withTemplateData('${request.userName} registered')
+            .withTemplateData('${stores.request.userName} registered')
             .withHeader('Content-Type', 'text/plain');
 
         const mock = await builder.start();

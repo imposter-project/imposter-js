@@ -47,7 +47,7 @@ describe('end to end tests', () => {
         const resource = builder.addResource('/users/{userName}', 'POST');
 
         resource.captures().fromPath('userName');
-        resource.responds(201).withTemplateData('Hello ${request.userName}');
+        resource.responds(201).withTemplateData('Hello ${stores.request.userName}');
 
         const mock = builder.build({logVerbose: true});
         await mock.start();
