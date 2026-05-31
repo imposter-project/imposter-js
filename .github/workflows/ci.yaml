@@ -21,7 +21,7 @@ jobs:
           node-version: '20.x'
 
       - name: Install Imposter
-        uses: imposter-project/imposter-github-action/setup@v0.6.1
+        uses: imposter-project/imposter-github-action/setup@v1.1.0
       - name: Pull engine
         run: imposter engine pull --engine-type ${{ matrix.engine }} --version ${{ matrix.version }}
 
@@ -64,7 +64,7 @@ jobs:
           node-version: '20.x'
 
       - name: Install Imposter
-        uses: imposter-project/imposter-github-action/setup@v0.6.1
+        uses: imposter-project/imposter-github-action/setup@v1.1.0
       - name: Pull engine
         run: imposter engine pull --engine-type ${{ matrix.engine }} --version ${{ matrix.version }}
 
