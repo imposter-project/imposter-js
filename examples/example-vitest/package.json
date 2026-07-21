@@ -19,7 +19,7 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@eslint/js": "^9.20.0",
-    "@imposter-js/imposter": "*",
+    "@imposter-js/imposter": "file:../../dist",
     "@typescript-eslint/eslint-plugin": "^8.24.1",
     "@typescript-eslint/parser": "^8.24.1",
     "builtins": "^5.1.0",
@@ -38,7 +38,7 @@
     "rimraf": "^6.0.1"
   },
   "dependencies": {
-    "axios": "^1.16.0"
+    "axios": "^1.18.0"
   },
   "engines": {
     "node": ">=20.0.0"
