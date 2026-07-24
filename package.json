@@ -43,7 +43,7 @@
     "rollup": "^4.61.1",
     "rollup-plugin-typescript2": "^0.37.0",
     "ts-jest": "^29.2.6",
-    "typescript": "^6.0.3"
+    "typescript": "^7.0.2"
   },
   "engines": {
     "node": ">=20.0.0"
