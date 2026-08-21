@@ -128,7 +128,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       - name: Get Changelog Entries
-        uses: release-tools/since@367f31b619916a7a93a79ed4fcab168cc8524a2b
+        uses: release-tools/since@116fddb81030dc514b95cdf6dc212ea95b519c7b
         with:
           output-file: version_changelog.txt
 
